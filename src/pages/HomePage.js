@@ -1,12 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { Post } from "../components";
+import { usePostContext } from "../context/posts_context";
 
 const HomePage = () => {
-  return <Wrapper></Wrapper>;
+  const { posts } = usePostContext();
+  return (
+    <Wrapper>
+      {posts.map((post) => {
+        return <Post post={post} />;
+      })}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
-  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default HomePage;

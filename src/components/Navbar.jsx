@@ -37,6 +37,8 @@ const Wrapper = styled.div`
   padding: 0 16px;
   width: 100%;
   bottom: 0;
+  z-index: 10;
+  background-color: white;
   ul {
     display: flex;
     height: 100%;

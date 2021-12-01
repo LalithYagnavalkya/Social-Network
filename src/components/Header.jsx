@@ -18,11 +18,13 @@ const Wrapper = styled.div`
   position: fixed;
   border-bottom: 1px solid #cfd0d1;
   width: 100%;
+  background-color: white;
   height: 45px;
   padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
   .logo {
     width: 103px;
   }

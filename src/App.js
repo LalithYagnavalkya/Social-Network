@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import { ScrollToTop, Navbar, Header } from "./components";
 import { ErrorPage, HomePage, ProfilePage } from "./pages";
+
 function App() {
   return (
     <Wrapper>
@@ -25,9 +26,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100vh;
   .page {
-    height: 86.3%;
+    height: 100%;
     left: 100px;
     margin-top: 45px;
+    margin-bottom: 45px;
+    z-index: -1;
   }
 `;
 export default App;
