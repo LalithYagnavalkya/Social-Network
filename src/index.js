@@ -3,12 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { PostsProvider } from "./context/posts_context";
+import { UserProvider } from "./context/user_context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <PostsProvider>
-      <App />
-    </PostsProvider>
+    <UserProvider>
+      <PostsProvider>
+        <App />
+      </PostsProvider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

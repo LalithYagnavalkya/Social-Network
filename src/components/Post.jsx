@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
 import { BsThreeDots, BsHeart, BsCursor, BsBookmark } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
+
 const Post = ({ post }) => {
   const [caption, setCaption] = useState(false);
 
@@ -10,8 +11,8 @@ const Post = ({ post }) => {
     <Wrapper>
       <div className="header">
         <div className="details">
-          <Avatar alt="Remy Sharp" src={post.image} />
-          <h5>{post.userName}</h5>
+          <Avatar alt="Remy Sharp" src={post.userImg} />
+          <h5>{post.creatorName}</h5>
         </div>
         <div className="options">
           <BsThreeDots />
@@ -31,17 +32,25 @@ const Post = ({ post }) => {
             <BsBookmark className="icon" />
           </div>
         </div>
-        <div className="likes">{post.likes.length} likes</div>
+        <div className="likes">7 likes</div>
         <div className="caption">
           <span>{post.userName}</span> {post.caption}
         </div>
-        <div className="comments"></div>
+        <div className="comments">
+          <span>view all comments</span>
+        </div>
       </div>
       <div className="line"></div>
       <div className="addComment">
-        <form action="" method="post">
+        <form action="" method="">
           <input type="text" placeholder="Add a comment" />
-          <button>Post</button>
+          <button
+            onClick={() => {
+              console.log("hello");
+            }}
+          >
+            Post
+          </button>
         </form>
       </div>
     </Wrapper>
@@ -60,7 +69,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   .header {
     height: 60px;
-    width: 600px;
+    /* width: 600px; */
     border-bottom: 1px solid #cfd0d1;
     display: flex;
     justify-content: space-between;
@@ -89,8 +98,9 @@ const Wrapper = styled.div`
 
   .image {
     img {
-      width: 599.47px;
-      height: 757.47px;
+      width: 598.47px;
+      height: 657.47px;
+      overflow: hidden;
       object-fit: cover;
     }
   }
@@ -123,6 +133,13 @@ const Wrapper = styled.div`
   .line {
     border-top: 1px solid #cfd0d1;
   }
+  .comments {
+    margin-top: 7px;
+    color: #949596;
+  }
+  .comments :hover {
+    cursor: pointer;
+  }
   .addComment {
     /* border-top: 1px solid #cfd0d1; */
     margin: auto 16px;
@@ -131,12 +148,14 @@ const Wrapper = styled.div`
       width: 90%;
       border: none;
       padding: 10px 0;
+      outline: none;
     }
     button {
       /* margin: auto 16px; */
       width: 10%;
       border: none;
       background-color: white;
+      outline: none;
     }
   }
 `;

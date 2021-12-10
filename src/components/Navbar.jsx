@@ -8,18 +8,11 @@ const Navbar = () => {
   return (
     <Wrapper>
       <ul>
-        {links.map((link) => {
+        {links.map((link, index) => {
+          const path = link.url;
           return (
-            <li>
-              <Link
-                className="link"
-                to={{
-                  pathname: "{link.url}",
-                  search: "",
-                  hash: "",
-                  state: {},
-                }}
-              >
+            <li key={index}>
+              <Link className="link" to={`${path}`}>
                 {link.icon}
               </Link>
             </li>

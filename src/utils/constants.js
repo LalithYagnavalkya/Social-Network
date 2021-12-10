@@ -14,12 +14,12 @@ export const links = [
     id: 2,
     text: "add",
     icon: <MdOutlineAddBox className="icon" />,
-    url: "/about",
+    url: "/addpost",
   },
   {
     id: 3,
     text: "profile",
     icon: <CgProfile className="icon" />,
-    url: "/:id",
+    url: "/profile",
   },
 ];

@@ -8,6 +8,7 @@ const Header = () => {
   return (
     <Wrapper>
       <BsCamera className="item" />
+
       <img className="logo" src={process.env.PUBLIC_URL + "/insta.svg"} />
       <AiOutlineMessage className="item" />
     </Wrapper>
@@ -25,6 +26,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+
   .logo {
     width: 103px;
   }

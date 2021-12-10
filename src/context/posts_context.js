@@ -2,40 +2,63 @@ import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { posts } from "../utils/tempdata";
 import reducer from "../reducers/posts_reducer";
-import {
-  GET_POSTS_BEGIN,
-  GET_POSTS_ERROR,
-  GET_POSTS_SUCCESS,
-} from "../actions";
+import { createPost, deletePost, getAllPosts } from "../api/Posts";
+import { useAuthContext } from "./user_context";
 
-const initalState = {
-  posts_loading: false,
-  posts_error: false,
+const initialState = {
   posts: [],
+  userPosts: [],
+  newPost: {
+    title: "",
+    message: "",
+    tags: "",
+    image: "",
+    creatorName: "",
+    creatorID: "",
+  },
+  deletedPost: "",
+  likedUsers: [],
+  isLoading: false,
 };
 
 const PostsContext = React.createContext();
 
 export const PostsProvider = ({ children }) => {
-  const [state, disptach] = useReducer(reducer, initalState);
+  const { setIsLoading } = useAuthContext();
+  const { UserData } = useAuthContext();
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fetchPosts = () => {
-    disptach({ type: GET_POSTS_BEGIN });
-    try {
-      // const response = posts;
-      const posts_data = posts;
-      disptach({ type: GET_POSTS_SUCCESS, payload: posts_data });
-    } catch (error) {
-      disptach({ type: GET_POSTS_ERROR });
+  const getPosts = async () => {
+    setIsLoading(true);
+    const posts = await getAllPosts();
+    console.log(UserData?.googleId);
+    dispatch({ type: "GET_ALL_POSTS", payload: posts.data });
+    if (UserData) {
+      dispatch({ type: "GET_USER_POSTS", payload: UserData?.googleId });
     }
+    setIsLoading(false);
+  };
+
+  // const getUserPosts = (id) => {
+
+  // };
+  const createNewPost = async (post) => {
+    await createPost(post);
+    dispatch({ type: "CREATE_NEW_POST", payload: post });
+  };
+  const removePost = async (id) => {
+    const post = await deletePost(id);
+    dispatch({ type: "DELETE_POST", payload: post });
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    getPosts();
+  }, [state.newPost, state.deletedPost, UserData]);
 
   return (
-    <PostsContext.Provider value={{ ...state }}>
+    <PostsContext.Provider
+      value={{ ...state, getPosts, createNewPost, removePost }}
+    >
       {children}
     </PostsContext.Provider>
   );
