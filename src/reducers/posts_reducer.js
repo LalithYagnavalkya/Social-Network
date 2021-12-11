@@ -22,6 +22,9 @@ const posts_reducer = (state, action) => {
     console.log(posts);
     return { ...state, userPosts: posts };
   }
+  if (action.type === "REMOVE_USER_POSTS") {
+    return { ...state, userPosts: [] };
+  }
 };
 
 export default posts_reducer;

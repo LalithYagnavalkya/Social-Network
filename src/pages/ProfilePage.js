@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Loading, Logout } from "../components";
 import Avatar from "@mui/material/Avatar";
@@ -8,17 +8,22 @@ import { PostTile } from "../components/PostTile";
 
 const ProfilePage = () => {
   const { userPosts, getPosts } = usePostContext();
-
   const { isLoading, UserData } = useAuthContext();
 
-  useEffect(() => {
-    // getUserPosts(UserData?.googleId);
-    console.log("profile page");
-    getPosts();
-  }, []);
+  // const [wait, setWait] = useState(true);
+
+  // const toggle = () => {
+  //   setTimeout(() => {
+  //     setWait(false);
+  //   }, 2000);
+  // };
+  // if (isLoading || wait) {
+  //   toggle();
+  // }
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <Wrapper>
       <div className="profile">
@@ -59,9 +64,13 @@ const ProfilePage = () => {
         </div>
         <div className="tofit">
           <div className="container">
-            {userPosts.map((post, index) => {
-              return <PostTile {...post} />;
-            })}
+            {!isLoading ? (
+              userPosts.map((post, index) => {
+                return <PostTile {...post} />;
+              })
+            ) : (
+              <Loading />
+            )}
           </div>
         </div>
       </div>

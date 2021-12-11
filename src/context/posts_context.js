@@ -39,9 +39,9 @@ export const PostsProvider = ({ children }) => {
     setIsLoading(false);
   };
 
-  // const getUserPosts = (id) => {
-
-  // };
+  const emptyuserPosts = () => {
+    dispatch({ type: "REMOVE_USER_POSTS" });
+  };
   const createNewPost = async (post) => {
     await createPost(post);
     dispatch({ type: "CREATE_NEW_POST", payload: post });
@@ -53,11 +53,15 @@ export const PostsProvider = ({ children }) => {
 
   useEffect(() => {
     getPosts();
+
+    // return () => {
+    //   emptyuserPosts();
+    // };
   }, [state.newPost, state.deletedPost, UserData]);
 
   return (
     <PostsContext.Provider
-      value={{ ...state, getPosts, createNewPost, removePost }}
+      value={{ ...state, getPosts, emptyuserPosts, createNewPost, removePost }}
     >
       {children}
     </PostsContext.Provider>

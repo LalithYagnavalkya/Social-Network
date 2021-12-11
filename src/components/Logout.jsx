@@ -2,15 +2,18 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import { useAuthContext } from "../context/user_context";
+import { usePostContext } from "../context/posts_context";
 
 const Logout = () => {
   const { authUser, setIsLoading } = useAuthContext();
+  const { posts, emptyuserPosts } = usePostContext();
   const logoutUserr = () => {
     setIsLoading(true);
     axios
       .get("http://localhost:5000/api/logout", { withCredentials: true })
       .then(() => {
         authUser(false);
+        emptyuserPosts();
         setIsLoading(false);
       });
   };
